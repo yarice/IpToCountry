@@ -5,6 +5,12 @@
 
 A Vue.js application that allows users to look up IP addresses and get their corresponding country information, including flags and local time.
 
+## 🌐 Live Application
+
+**Try it now:** [https://yarice.github.io/IpToCountry/](https://yarice.github.io/IpToCountry/)
+
+The app is automatically deployed to GitHub Pages on every merge to main.
+
 ## Features
 
 - **IP Address Lookup**: Enter IPv4 or IPv6 addresses to get country information
@@ -28,7 +34,7 @@ _The IP Lookup application showing both IPv4 and IPv6 support with country flags
 - **Styling**: CSS with modern design patterns
 - **Build Tool**: Vite
 - **API**: ipwho.is for IP geolocation data
-- **CI/CD**: GitHub Actions for automated testing and deployment
+- **CI/CD**: GitHub Actions with automated testing and deployment
 
 ## Getting Started
 
@@ -106,3 +112,20 @@ npm run dev
 - **Invalid IPs**: Shows validation error messages
 - **Network Errors**: Handles connection failures gracefully
 - **API Errors**: Displays specific error messages from the API
+
+## 🚀 CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment:
+
+### Automated Checks (on every PR):
+
+- ✅ **Tests**: Runs all unit tests with Vitest
+- ✅ **Format**: Validates code formatting with Prettier
+- ✅ **Build**: Ensures the application builds successfully
+- ✅ **Coverage**: Generates test coverage reports
+
+### Automated Deployment (on merge to main):
+
+- 🚀 **Build**: Creates production build
+- 🚀 **Deploy**: Automatically deploys to GitHub Pages
+- 🚀 **Live**: Updates the live application at [yarice.github.io/IpToCountry](https://yarice.github.io/IpToCountry/)
