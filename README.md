@@ -9,7 +9,6 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 - **Country Flags**: Shows the flag of the country where the IP is located
 - **Single Active Row**: Only one IP row can be edited at a time for focused workflow
 - **Smart Validation**: Validates IP addresses with 200ms delay to prevent premature errors
-- **Click-outside Abandonment**: Click outside interactive elements to abandon editing
 - **Error Handling**: Displays helpful error messages for invalid IPs or API failures
 
 ## Tech Stack
@@ -17,13 +16,9 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 - **Frontend**: Vue.js 3 with Composition API
 - **Language**: TypeScript
 - **Testing**: Vitest with Vue Testing Library
+- **Styling**: CSS with modern design patterns
 - **Build Tool**: Vite
-- **Styling**: CSS3
-
-## API Services
-
-- **IP Lookup**: [ipwho.is](https://ipwho.is/) - Provides country, timezone, and other IP information
-- **Flags**: [flagcdn.com](https://flagcdn.com/) - Provides country flag images
+- **API**: ipwho.is for IP geolocation data
 
 ## Getting Started
 
@@ -35,105 +30,61 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 ### Installation
 
 1. Clone the repository:
-
 ```bash
-git clone <repository-url>
-cd ip-to-country-app
+git clone https://github.com/yarice/IpToCountry.git
+cd IpToCountry
 ```
 
 2. Install dependencies:
-
 ```bash
 npm install
 ```
 
 3. Start the development server:
-
 ```bash
 npm run dev
 ```
 
 4. Open your browser and navigate to `http://localhost:5173`
 
-### Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run serve` - Preview production build
-- `npm run test` - Run tests
+- `npm run preview` - Preview production build
+- `npm test` - Run tests
 - `npm run test:watch` - Run tests in watch mode
 - `npm run test:coverage` - Run tests with coverage report
 
 ## Usage
 
-1. **Open the App**: Click "Open IP Lookup" to start
-2. **Add IP Addresses**: Click "+ Add" to create new input fields
-3. **Enter IPs**: Type valid IPv4 or IPv6 addresses in the input fields
-4. **Search**: Click outside the input field to search (search happens on blur with 200ms delay)
-5. **View Results**: See the country flag and local time for each IP
-6. **Abandon Editing**: Click outside interactive elements to abandon current editing session
-7. **Close**: Click the "×" button to close the app (clears all data)
+1. **Add IP Rows**: Click the "+ Add" button to create new IP input rows
+2. **Enter IP Address**: Type a valid IPv4 or IPv6 address in any row
+3. **View Results**: The app will display:
+   - Country name
+   - Country flag
+   - Current time in that timezone
+4. **Edit IPs**: Click on any row to edit the IP address
+5. **Close App**: Click the "×" button to close and reset the application
 
-## Project Structure
+## Features in Detail
 
-```
-src/
-├── components/
-│   └── IpRow.vue          # Individual IP input row component
-├── services/
-│   └── ipService.ts       # API service for IP lookups
-├── App.vue                # Main application component
-├── main.ts               # Application entry point
-└── style.css             # Global styles
+### IP Validation
+- Supports both IPv4 and IPv6 addresses
+- Real-time validation with visual feedback
+- Prevents API calls for invalid IPs
 
-tests/
-├── App.test.ts           # Tests for main app component
-├── IpRow.test.ts         # Tests for IP row component
-├── ipService.test.ts     # Tests for IP service
-└── setup.ts              # Test setup configuration
-```
+### Time Display
+- Shows current time in the IP's timezone
+- Updates every second
+- Automatically starts when a valid IP is entered
 
-## Testing
+### State Management
+- Only one row can be active (editable) at a time
+- Add button is disabled when a row is being edited
+- Clean state management with Vue 3 Composition API
 
-The project includes comprehensive unit test coverage:
-
-- **App.test.ts**: Tests the main application component
-- **IpRow.test.ts**: Tests individual IP row components
-- **ipService.test.ts**: Tests the IP lookup service
-
-Run tests:
-
-```bash
-npm run test
-npm run test:coverage
-```
-
-## Key Components
-
-### App.vue
-
-- Main application component
-- Manages IP rows and active state
-
-### IpRow.vue
-
-- Individual IP input component
-- Handles validation and API calls
-- Displays results and errors
-
-### ipService.ts
-
-- API service for IP lookups
-
-## How It Works
-
-- **Single Active Row**: Only one IP row can be edited at a time
-- **Search on Blur**: Search happens when you click outside the input field
-- **Click Outside**: Click anywhere outside to abandon editing
-- **Add Button**: Only enabled when no row is being edited
-
-## Error Handling
-
-- **Invalid IP Format**: Shows validation error for malformed IPs
+### Error Handling
+- **Invalid IPs**: Shows validation error messages
 - **Network Errors**: Handles connection failures gracefully
 - **API Errors**: Displays specific error messages from the API
