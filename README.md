@@ -118,12 +118,14 @@ npm run dev
 This project uses GitHub Actions for continuous integration and deployment:
 
 ### Automated Checks (on every PR):
+
 - ✅ **Tests**: Runs all unit tests with Vitest
 - ✅ **Format**: Validates code formatting with Prettier
 - ✅ **Build**: Ensures the application builds successfully
 - ✅ **Coverage**: Generates test coverage reports
 
 ### Automated Deployment (on merge to main):
+
 - 🚀 **Build**: Creates production build
 - 🚀 **Deploy**: Automatically deploys to GitHub Pages
 - 🚀 **Live**: Updates the live application at [yarice.github.io/IpToCountry](https://yarice.github.io/IpToCountry/)
