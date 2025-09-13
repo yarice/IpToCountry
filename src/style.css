@@ -54,7 +54,7 @@ body {
 /* Add button (enabled) */
 .btn-primary {
   margin: 0 14px 12px 14px;
-  background-color: red; /* mock blue */
+  background-color: #3FA9F5; /* mock blue */
   border: none;
   padding: 6px 14px;
   font-size: 13px;
