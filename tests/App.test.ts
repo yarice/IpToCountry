@@ -90,7 +90,9 @@ describe('App.vue', () => {
       screen.getByRole('button', { name: /Open IP To Country/i })
     ).toBeInTheDocument()
 
-    const reopenBtn = screen.getByRole('button', { name: /Open IP To Country/i })
+    const reopenBtn = screen.getByRole('button', {
+      name: /Open IP To Country/i,
+    })
     await fireEvent.click(reopenBtn)
     expect(mockReopenApp).toHaveBeenCalled()
   })
