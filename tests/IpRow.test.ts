@@ -137,7 +137,7 @@ describe('IpRow.vue', () => {
     expect(emitted()['done']).toBeFalsy()
   })
 
-  it('shows loading state during API call', async () => {
+  it('shows loading spinner during API call', () => {
     mockState.value.loading = true
 
     render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
@@ -145,5 +145,32 @@ describe('IpRow.vue', () => {
     expect(
       screen.getByRole('textbox').parentElement?.querySelector('.spinner')
     ).toBeInTheDocument()
+  })
+
+  it('renders flag and time when successful', () => {
+    mockState.value.result = {
+      country: 'United States',
+      flag: 'https://flagcdn.com/us.svg',
+      timezone: 'America/Chicago',
+    }
+    mockTime.value = '12:34:56'
+
+    render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+
+    const flag = screen.getByRole('img', { name: 'flag' })
+    const time = screen.getByText('12:34:56')
+
+    expect(flag).toBeInTheDocument()
+    expect(flag).toHaveAttribute('src', 'https://flagcdn.com/us.svg')
+    expect(time).toBeInTheDocument()
+  })
+
+  it('renders error message when API fails', () => {
+    mockState.value.error = 'Invalid IP address'
+
+    render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+
+    expect(screen.getByText('Invalid IP address')).toBeInTheDocument()
+    expect(screen.getByText('Invalid IP address')).toHaveClass('error')
   })
 })

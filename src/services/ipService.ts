@@ -1,4 +1,4 @@
-export interface IpLookupResult {
+export interface IpLookupData {
   country: string
   flag: string
   timezone: string
@@ -6,7 +6,7 @@ export interface IpLookupResult {
 
 export interface IpLookupResponse {
   success: boolean
-  data?: IpLookupResult
+  data?: IpLookupData
   error?: string
 }
 

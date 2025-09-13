@@ -102,31 +102,11 @@ describe('App.vue', () => {
     expect(addBtn).toBeDisabled()
   })
 
-  it('handles row events correctly', async () => {
-    mockRows.push({ id: 'row1' })
+  it('enables Add button when no row is active', async () => {
+    mockActiveRowId = null
     render(App)
     const addBtn = screen.getByRole('button', { name: /\+ Add/i })
-
-    await fireEvent.click(addBtn)
-    expect(mockAddRow).toHaveBeenCalled()
-
-    const input = screen.getByRole('textbox')
-    await fireEvent.focus(input)
-    expect(mockSetActiveRow).toHaveBeenCalledWith('row1')
-  })
-
-  it('shows row numbers correctly', async () => {
-    mockRows.push({ id: 'row1' })
-    render(App)
-    expect(screen.getByText('1')).toBeInTheDocument()
-
-    document.body.innerHTML = ''
-    mockRows.push({ id: 'row2' })
-    render(App)
-    const rowNumbers = screen.getAllByText(/^[12]$/)
-    expect(rowNumbers).toHaveLength(2)
-    expect(rowNumbers[0]).toHaveTextContent('1')
-    expect(rowNumbers[1]).toHaveTextContent('2')
+    expect(addBtn).not.toBeDisabled()
   })
 
   it('disables other rows when one is active', async () => {

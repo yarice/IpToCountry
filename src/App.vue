@@ -9,7 +9,11 @@
         Enter one or more IP addresses and get their country
       </p>
 
-      <button class="btn-primary" @click="addRow" :disabled="state.activeRowId">
+      <button
+        class="btn-primary"
+        @click="addRow"
+        :disabled="!!state.activeRowId"
+      >
         + Add
       </button>
 
@@ -22,7 +26,7 @@
           <IpRow
             :index="index + 1"
             :rowId="row.id"
-            :disabled="state.activeRowId && !isRowActive(row.id)"
+            :disabled="!!state.activeRowId && !isRowActive(row.id)"
             @done="handleRowDone"
             @edit="handleRowEdit"
           />
