@@ -16,25 +16,9 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 
 ## Screenshots
 
-### Main Application View
-![IP Lookup App](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=IP+Lookup+Application)
+![IP Lookup App Demo](demo.jpeg)
 
-*The main interface showing IP input rows with country flags and local time displays*
-
-### Adding New IP Rows
-![Add IP Row](https://via.placeholder.com/800x300/7ED321/FFFFFF?text=Adding+New+IP+Rows)
-
-*Click the "+ Add" button to create new IP input rows*
-
-### Successful IP Lookup
-![IP Results](https://via.placeholder.com/800x400/50C878/FFFFFF?text=IP+Lookup+Results)
-
-*Successful IP lookup showing country flag, name, and local time*
-
-### Error Handling
-![Error Display](https://via.placeholder.com/800x300/FF6B6B/FFFFFF?text=Error+Handling)
-
-*Error messages for invalid IPs or API failures*
+*The IP Lookup application showing both IPv4 and IPv6 support with country flags and local time displays*
 
 ## Tech Stack
 
