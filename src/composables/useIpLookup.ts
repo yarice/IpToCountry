@@ -1,11 +1,11 @@
 import { ref } from 'vue'
-import { lookupIp, IpLookupResult } from '../services/ipService'
+import { lookupIp, IpLookupData } from '../services/ipService'
 import { isIP } from 'is-ip'
 
 export interface IpLookupState {
   loading: boolean
   error: string
-  result: IpLookupResult | null
+  result: IpLookupData | null
 }
 
 export function useIpLookup() {
@@ -24,25 +24,23 @@ export function useIpLookup() {
     state.value.loading = true
     state.value.error = ''
 
-    const response = await lookupIp(ip)
+    const { success, data, error } = await lookupIp(ip)
 
-    if (response.success && response.data) {
-      state.value.result = response.data
-      state.value.error = ''
-      state.value.loading = false
+    if (success && data) {
+      Object.assign(state.value, { result: data, error: '', loading: false })
       return true
     } else {
-      state.value.error = response.error || 'Lookup failed'
-      state.value.result = null
-      state.value.loading = false
+      Object.assign(state.value, {
+        error: error || 'Lookup failed',
+        result: null,
+        loading: false,
+      })
       return false
     }
   }
 
   const clearResult = () => {
-    state.value.result = null
-    state.value.error = ''
-    state.value.loading = false
+    Object.assign(state.value, { result: null, error: '', loading: false })
   }
 
   return {
