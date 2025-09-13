@@ -18,7 +18,7 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 
 ![IP Lookup App Demo](demo.jpeg)
 
-*The IP Lookup application showing both IPv4 and IPv6 support with country flags and local time displays*
+_The IP Lookup application showing both IPv4 and IPv6 support with country flags and local time displays_
 
 ## Tech Stack
 
@@ -34,24 +34,27 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 
 ### Prerequisites
 
-- Node.js (v18 or higher) 
+- Node.js (v18 or higher)
 - Git (for version control)
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yarice/IpToCountry.git
 cd IpToCountry
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -81,21 +84,25 @@ npm run dev
 ## Features in Detail
 
 ### IP Validation
+
 - Supports both IPv4 and IPv6 addresses
 - Real-time validation with visual feedback
 - Prevents API calls for invalid IPs
 
 ### Time Display
+
 - Shows current time in the IP's timezone
 - Updates every second
 - Automatically starts when a valid IP is entered
 
 ### State Management
+
 - Only one row can be active (editable) at a time
 - Add button is disabled when a row is being edited
 - Clean state management with Vue 3 Composition API
 
 ### Error Handling
+
 - **Invalid IPs**: Shows validation error messages
 - **Network Errors**: Handles connection failures gracefully
 - **API Errors**: Displays specific error messages from the API
