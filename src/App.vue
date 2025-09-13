@@ -2,7 +2,7 @@
   <div>
     <div v-if="state.visible" class="app">
       <div class="header">
-        <h3>IP Lookup</h3>
+        <h3>IP To Country</h3>
         <button class="close-btn" @click="closeApp">&times;</button>
       </div>
       <p class="subtitle">
@@ -35,7 +35,7 @@
     </div>
 
     <div v-else class="reopen">
-      <button class="btn-primary" @click="reopenApp">Open IP Lookup</button>
+      <button class="btn-primary" @click="reopenApp">Open IP To Country</button>
     </div>
   </div>
 </template>

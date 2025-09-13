@@ -20,9 +20,9 @@ The app is automatically deployed to GitHub Pages on every merge to main.
 
 ## Screenshots
 
-![IP Lookup App Demo](demo.jpeg)
+![IP To Country App Demo](demo.jpeg)
 
-_The IP Lookup application showing both IPv4 and IPv6 support with country flags and local time displays_
+_The IP To Country application showing both IPv4 and IPv6 support with country flags and local time displays_
 
 ## Tech Stack
 

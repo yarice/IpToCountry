@@ -20,7 +20,7 @@ describe('useIpLookup', () => {
     expect(result).toBe(null)
   })
 
-  it('should handle successful IP lookup', async () => {
+  it('should handle successful IP Lookup', async () => {
     const mockResult = {
       country: 'United States',
       flag: 'https://flagcdn.com/us.svg',
@@ -43,7 +43,7 @@ describe('useIpLookup', () => {
     expect(stateResult).toEqual(mockResult)
   })
 
-  it('should handle failed IP lookup', async () => {
+  it('should handle failed IP Lookup', async () => {
     ;(ipService.lookupIp as any).mockResolvedValue({
       success: false,
       error: 'API Error',
