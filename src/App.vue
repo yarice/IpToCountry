@@ -6,11 +6,11 @@
         <button class="close-btn" @click="closeApp">&times;</button>
       </div>
       <p class="subtitle">
-        Enter one or more IP addresses and get their country
+Enter one or more IP addresses and get their country
       </p>
 
       <button class="btn-primary" @click="addRow" :disabled="hasActiveRow">
-        + Add
++ Add
       </button>
 
       <div class="rows">
