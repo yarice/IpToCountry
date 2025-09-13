@@ -34,42 +34,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
-import IpRow from "./components/IpRow.vue";
+import { defineComponent, ref, computed } from 'vue'
+import IpRow from './components/IpRow.vue'
 
 export default defineComponent({
   components: { IpRow },
   setup() {
-    const visible = ref(true);
-    const rowCount = ref(0);
-    const activeRowIndex = ref<number | null>(null);
+    const visible = ref(true)
+    const rowCount = ref(0)
+    const activeRowIndex = ref<number | null>(null)
 
     const clearActiveRow = () => {
-      activeRowIndex.value = null;
-    };
+      activeRowIndex.value = null
+    }
 
     const setActiveRow = (index: number) => {
-      activeRowIndex.value = index;
-    };
+      activeRowIndex.value = index
+    }
 
     const hasActiveRow = computed(() => {
-      return activeRowIndex.value !== null;
-    });
+      return activeRowIndex.value !== null
+    })
 
     const isRowActive = (index: number) => {
-      return activeRowIndex.value === index;
-    };
+      return activeRowIndex.value === index
+    }
 
     const addRow = () => {
-      rowCount.value++;
-      setActiveRow(rowCount.value);
-    };
+      rowCount.value++
+      setActiveRow(rowCount.value)
+    }
 
     const closeApp = () => {
-      rowCount.value = 0;
-      clearActiveRow();
-      visible.value = false;
-    };
+      rowCount.value = 0
+      clearActiveRow()
+      visible.value = false
+    }
 
     return {
       rowCount,
@@ -80,7 +80,7 @@ export default defineComponent({
       setActiveRow,
       hasActiveRow,
       isRowActive,
-    };
+    }
   },
-});
+})
 </script>
