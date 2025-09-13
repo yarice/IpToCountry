@@ -1,5 +1,8 @@
 # IP to Country Lookup App
 
+[![Tests](https://github.com/yarice/IpToCountry/actions/workflows/test.yml/badge.svg)](https://github.com/yarice/IpToCountry/actions/workflows/test.yml)
+[![CI/CD](https://github.com/yarice/IpToCountry/actions/workflows/ci.yml/badge.svg)](https://github.com/yarice/IpToCountry/actions/workflows/ci.yml)
+
 A Vue.js application that allows users to look up IP addresses and get their corresponding country information, including flags and local time.
 
 ## Features
