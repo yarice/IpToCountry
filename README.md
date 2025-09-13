@@ -28,6 +28,7 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 - **Styling**: CSS with modern design patterns
 - **Build Tool**: Vite
 - **API**: ipwho.is for IP geolocation data
+- **CI/CD**: GitHub Actions for automated testing and deployment
 
 ## Getting Started
 
