@@ -24,17 +24,6 @@ The app is automatically deployed to GitHub Pages on every merge to main.
 
 _The IP Lookup application showing both IPv4 and IPv6 support with country flags and local time displays_
 
-## Tech Stack
-
-- **Frontend**: Vue.js 3 with Composition API
-- **Language**: TypeScript
-- **Testing**: Vitest with Vue Testing Library
-- **Styling**: CSS with modern design patterns
-- **Build Tool**: Vite
-- **API**: ipwho.is for IP geolocation data
-- **Architecture**: Composables for reusable logic (`useIpLookup`, `useTimer`, `useAppState`)
-- **CI/CD**: GitHub Actions with automated testing and deployment
-
 ## Getting Started
 
 ### Installation
