@@ -58,7 +58,7 @@ describe('App.vue', () => {
 
   it('renders the app with title and subtitle', () => {
     render(App)
-    expect(screen.getByText(/IP Lookup/i)).toBeInTheDocument()
+    expect(screen.getByText(/IP To Country/i)).toBeInTheDocument()
     expect(
       screen.getByText(/Enter one or more IP addresses/)
     ).toBeInTheDocument()
@@ -87,10 +87,12 @@ describe('App.vue', () => {
     mockVisible = false
     const { rerender: rerenderClosed } = render(App)
     expect(
-      screen.getByRole('button', { name: /Open IP Lookup/i })
+      screen.getByRole('button', { name: /Open IP To Country/i })
     ).toBeInTheDocument()
 
-    const reopenBtn = screen.getByRole('button', { name: /Open IP Lookup/i })
+    const reopenBtn = screen.getByRole('button', {
+      name: /Open IP To Country/i,
+    })
     await fireEvent.click(reopenBtn)
     expect(mockReopenApp).toHaveBeenCalled()
   })
