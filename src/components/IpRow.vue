@@ -58,6 +58,7 @@ export default defineComponent({
       // Delay to make sure isMounted value is properly set - we don't want to search if the app is closed
       setTimeout(async () => {
         if (!isMounted.value) return
+        //no need to check if the ip hasn't changed
         if (currentIp.value !== originalIp.value) {
           if (!isIP(currentIp.value)) {
             error.value = 'Please enter a valid IPv4 or IPv6 address'
@@ -65,7 +66,10 @@ export default defineComponent({
           }
           await searchIp()
         }
+        // Only emit 'done' if IP is valid (not empty and not invalid)
+        if (currentIp.value && isIP(currentIp.value)) {
           emit('done')
+        }
       }, ON_BLUR_DELAY)
     }
 
@@ -88,14 +92,14 @@ export default defineComponent({
     const startClock = (timezone: string) => {
       //clear any existing timer to prevent multiple timers running simultaneously
       if (timer) clearInterval(timer)
-      //update function that will be called every second
+      //will be called every second
       const update = () => {
         const now = new Date().toLocaleTimeString('en-GB', { timeZone: timezone })
         time.value = now
       }
       //update immediately
       update()      
-      //call update() every 1s
+      //call every 1s
       timer = window.setInterval(update, CLOCK_UPDATE_INTERVAL)
     }
 
