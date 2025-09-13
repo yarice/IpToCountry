@@ -2,7 +2,7 @@ import { vi, describe, it, expect } from 'vitest'
 import { lookupIp } from '../src/services/ipService'
 
 describe('ipService', () => {
-  it('returns country info for valid IP', async () => {
+  it('returns success response for valid IP', async () => {
     const mockData = {
       success: true,
       country: 'United States',
@@ -18,24 +18,58 @@ describe('ipService', () => {
 
     const result = await lookupIp('8.8.8.8')
 
-    expect(result.country).toBe('United States')
-    expect(result.flag).toBe('https://flagcdn.com/us.svg')
-    expect(result.timezone).toBe('America/New_York')
+    expect(result.success).toBe(true)
+    expect(result.data?.country).toBe('United States')
+    expect(result.data?.flag).toBe('https://flagcdn.com/us.svg')
+    expect(result.data?.timezone).toBe('America/New_York')
   })
 
-  it('throws error for invalid IP', async () => {
+  it('returns error response for invalid IP', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       status: 200,
-      json: async () => ({ success: false }),
+      json: async () => ({ success: false, message: 'Invalid IP' }),
     } as Response)
 
-    await expect(lookupIp('invalid-ip')).rejects.toThrow('Lookup failed')
+    const result = await lookupIp('invalid-ip')
+
+    expect(result.success).toBe(false)
+    expect(result.error).toBe('Invalid IP')
+    expect(result.data).toBeUndefined()
   })
 
-  it('throws error on network failure', async () => {
+  it('returns error response on HTTP error', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: false,
+      status: 404,
+      statusText: 'Not Found',
+    } as Response)
+
+    const result = await lookupIp('8.8.8.8')
+
+    expect(result.success).toBe(false)
+    expect(result.error).toBe('HTTP 404: Not Found')
+  })
+
+  it('returns error response on network failure', async () => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('Network error'))
 
-    await expect(lookupIp('8.8.8.8')).rejects.toThrow('Network error')
+    const result = await lookupIp('8.8.8.8')
+
+    expect(result.success).toBe(false)
+    expect(result.error).toBe('Network error')
+  })
+
+  it('handles malformed API response', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({ invalid: 'response' }),
+    } as Response)
+
+    const result = await lookupIp('8.8.8.8')
+
+    expect(result.success).toBe(false)
+    expect(result.error).toBe('Lookup failed')
   })
 })

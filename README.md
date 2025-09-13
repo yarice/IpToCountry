@@ -14,8 +14,9 @@ The app is automatically deployed to GitHub Pages on every merge to main.
 - **Real-time Clock**: Displays the current time in the IP's timezone
 - **Country Flags**: Shows the flag of the country where the IP is located
 - **Single Active Row**: Only one IP row can be edited at a time for focused workflow
-- **Smart Validation**: Validates IP addresses with 200ms delay to prevent premature errors
+- **Validation**: Validates IP addresses before making API calls
 - **Error Handling**: Displays helpful error messages for invalid IPs or API failures
+- **Composable Architecture**: Clean separation of concerns with Vue 3 composables
 
 ## Screenshots
 
@@ -31,15 +32,10 @@ _The IP Lookup application showing both IPv4 and IPv6 support with country flags
 - **Styling**: CSS with modern design patterns
 - **Build Tool**: Vite
 - **API**: ipwho.is for IP geolocation data
+- **Architecture**: Composables for reusable logic (`useIpLookup`, `useTimer`, `useAppState`)
 - **CI/CD**: GitHub Actions with automated testing and deployment
 
 ## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- Git (for version control)
-- npm or yarn
 
 ### Installation
 
@@ -102,13 +98,13 @@ npm run dev
 
 - Only one row can be active (editable) at a time
 - Add button is disabled when a row is being edited
-- Clean state management with Vue 3 Composition API
 
 ### Error Handling
 
 - **Invalid IPs**: Shows validation error messages
 - **Network Errors**: Handles connection failures gracefully
 - **API Errors**: Displays specific error messages from the API
+- **Structured Responses**: Service returns success/error objects instead of throwing exceptions
 
 ## 🚀 CI/CD Pipeline
 
