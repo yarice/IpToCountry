@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="visible" class="app">
+    <div v-if="state.visible" class="app">
       <div class="header">
         <h3>IP Lookup</h3>
         <button class="close-btn" @click="closeApp">&times;</button>
@@ -9,24 +9,25 @@
         Enter one or more IP addresses and get their country
       </p>
 
-      <button class="btn-primary" @click="addRow" :disabled="hasActiveRow">
+      <button class="btn-primary" @click="addRow" :disabled="state.activeRowId">
         + Add
       </button>
 
       <div class="rows">
-        <div v-for="i in rowCount" :key="i" class="row-wrapper">
+        <div v-for="(row, index) in state.rows" :key="row.id" class="row-wrapper">
           <IpRow
-            :index="i"
-            :disabled="hasActiveRow && !isRowActive(i)"
-            @done="clearActiveRow"
-            @edit="() => setActiveRow(i)"
+            :index="index + 1"
+            :rowId="row.id"
+            :disabled="state.activeRowId && !isRowActive(row.id)"
+            @done="handleRowDone"
+            @edit="handleRowEdit"
           />
         </div>
       </div>
     </div>
 
     <div v-else class="reopen">
-      <button class="btn-primary" @click="visible = true">
+      <button class="btn-primary" @click="reopenApp">
         Open IP Lookup
       </button>
     </div>
@@ -34,52 +35,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent } from 'vue'
 import IpRow from './components/IpRow.vue'
+import { useAppState } from './composables/useAppState'
 
 export default defineComponent({
   components: { IpRow },
   setup() {
-    const visible = ref(true)
-    const rowCount = ref(0)
-    const activeRowIndex = ref<number | null>(null)
+    const { state, addRow, setActiveRow, clearActiveRow, isRowActive, closeApp, reopenApp } = useAppState()
 
-    const clearActiveRow = () => {
-      activeRowIndex.value = null
-    }
-
-    const setActiveRow = (index: number) => {
-      activeRowIndex.value = index
-    }
-
-    const hasActiveRow = computed(() => {
-      return activeRowIndex.value !== null
-    })
-
-    const isRowActive = (index: number) => {
-      return activeRowIndex.value === index
-    }
-
-    const addRow = () => {
-      rowCount.value++
-      setActiveRow(rowCount.value)
-    }
-
-    const closeApp = () => {
-      rowCount.value = 0
+    const handleRowDone = () => {
       clearActiveRow()
-      visible.value = false
+    }
+
+    const handleRowEdit = (rowId: string) => {
+      setActiveRow(rowId)
     }
 
     return {
-      rowCount,
+      state,
       addRow,
-      visible,
-      closeApp,
-      clearActiveRow,
       setActiveRow,
-      hasActiveRow,
+      clearActiveRow,
       isRowActive,
+      closeApp,
+      reopenApp,
+      handleRowDone,
+      handleRowEdit
     }
   },
 })
