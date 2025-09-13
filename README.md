@@ -33,7 +33,8 @@ A Vue.js application that allows users to look up IP addresses and get their cor
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js (v18 or higher) 
+- Git (for version control)
 - npm or yarn
 
 ### Installation
