@@ -6,14 +6,14 @@ export function useTimer() {
 
   const startClock = (timezone: string) => {
     if (timer) clearInterval(timer)
-    
+
     const update = () => {
       const now = new Date().toLocaleTimeString('en-GB', {
         timeZone: timezone,
       })
       time.value = now
     }
-    
+
     update()
     timer = window.setInterval(update, 1000)
   }
@@ -29,6 +29,6 @@ export function useTimer() {
   return {
     time,
     startClock,
-    stopClock
+    stopClock,
   }
 }

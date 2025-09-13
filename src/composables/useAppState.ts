@@ -15,7 +15,7 @@ export function useAppState() {
   const state = ref<AppState>({
     visible: true,
     rows: [],
-    activeRowId: null
+    activeRowId: null,
   })
 
   const addRow = () => {
@@ -24,7 +24,6 @@ export function useAppState() {
     rows.push(newRow)
     setActiveRow(newRow.id)
   }
-
 
   const setActiveRow = (id: string) => {
     state.value.activeRowId = id
@@ -57,6 +56,6 @@ export function useAppState() {
     clearActiveRow,
     isRowActive,
     closeApp,
-    reopenApp
+    reopenApp,
   }
 }

@@ -14,7 +14,11 @@
       </button>
 
       <div class="rows">
-        <div v-for="(row, index) in state.rows" :key="row.id" class="row-wrapper">
+        <div
+          v-for="(row, index) in state.rows"
+          :key="row.id"
+          class="row-wrapper"
+        >
           <IpRow
             :index="index + 1"
             :rowId="row.id"
@@ -27,9 +31,7 @@
     </div>
 
     <div v-else class="reopen">
-      <button class="btn-primary" @click="reopenApp">
-        Open IP Lookup
-      </button>
+      <button class="btn-primary" @click="reopenApp">Open IP Lookup</button>
     </div>
   </div>
 </template>
@@ -42,7 +44,15 @@ import { useAppState } from './composables/useAppState'
 export default defineComponent({
   components: { IpRow },
   setup() {
-    const { state, addRow, setActiveRow, clearActiveRow, isRowActive, closeApp, reopenApp } = useAppState()
+    const {
+      state,
+      addRow,
+      setActiveRow,
+      clearActiveRow,
+      isRowActive,
+      closeApp,
+      reopenApp,
+    } = useAppState()
 
     const handleRowDone = () => {
       clearActiveRow()
@@ -61,7 +71,7 @@ export default defineComponent({
       closeApp,
       reopenApp,
       handleRowDone,
-      handleRowEdit
+      handleRowEdit,
     }
   },
 })

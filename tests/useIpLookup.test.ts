@@ -14,7 +14,7 @@ describe('useIpLookup', () => {
   it('should initialize with empty state', () => {
     const { state } = useIpLookup()
     const { loading, error, result } = state.value
-    
+
     expect(loading).toBe(false)
     expect(error).toBe('')
     expect(result).toBe(null)
@@ -29,11 +29,11 @@ describe('useIpLookup', () => {
 
     ;(ipService.lookupIp as any).mockResolvedValue({
       success: true,
-      data: mockResult
+      data: mockResult,
     })
 
     const { state, searchIp } = useIpLookup()
-    
+
     const result = await searchIp('8.8.8.8')
     const { loading, error, result: stateResult } = state.value
 
@@ -46,11 +46,11 @@ describe('useIpLookup', () => {
   it('should handle failed IP lookup', async () => {
     ;(ipService.lookupIp as any).mockResolvedValue({
       success: false,
-      error: 'API Error'
+      error: 'API Error',
     })
 
     const { state, searchIp } = useIpLookup()
-    
+
     const result = await searchIp('8.8.8.8')
     const { loading, error, result: stateResult } = state.value
 
@@ -62,7 +62,7 @@ describe('useIpLookup', () => {
 
   it('should validate IP format before API call', async () => {
     const { state, searchIp } = useIpLookup()
-    
+
     const result = await searchIp('invalid-ip')
     const { error } = state.value
 
@@ -73,7 +73,7 @@ describe('useIpLookup', () => {
 
   it('should clear result correctly', () => {
     const { state, clearResult } = useIpLookup()
-    
+
     state.value.result = { country: 'US', flag: 'flag.svg', timezone: 'UTC' }
     state.value.error = 'Some error'
     state.value.loading = true
@@ -87,18 +87,25 @@ describe('useIpLookup', () => {
   })
 
   it('should set loading state during API call', async () => {
-    ;(ipService.lookupIp as any).mockImplementation(() => 
-      new Promise(resolve => setTimeout(() => resolve({
-        success: true,
-        data: { country: 'US', flag: 'flag.svg', timezone: 'UTC' }
-      }), 100))
+    ;(ipService.lookupIp as any).mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                success: true,
+                data: { country: 'US', flag: 'flag.svg', timezone: 'UTC' },
+              }),
+            100
+          )
+        )
     )
 
     const { state, searchIp } = useIpLookup()
-    
+
     const searchPromise = searchIp('8.8.8.8')
     expect(state.value.loading).toBe(true)
-    
+
     await searchPromise
     expect(state.value.loading).toBe(false)
   })

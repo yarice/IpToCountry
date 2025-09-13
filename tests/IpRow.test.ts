@@ -12,7 +12,7 @@ vi.mock('../src/services/ipService', () => ({
 const mockState = ref({
   loading: false,
   result: null as any,
-  error: null as any
+  error: null as any,
 })
 
 const mockTime = ref('')
@@ -24,16 +24,16 @@ vi.mock('../src/composables/useIpLookup', () => ({
   useIpLookup: vi.fn(() => ({
     state: mockState,
     searchIp: mockSearchIp,
-    clearResult: vi.fn()
-  }))
+    clearResult: vi.fn(),
+  })),
 }))
 
 vi.mock('../src/composables/useTimer', () => ({
   useTimer: vi.fn(() => ({
     time: mockTime,
     startClock: mockStartClock,
-    stopClock: mockStopClock
-  }))
+    stopClock: mockStopClock,
+  })),
 }))
 
 describe('IpRow.vue', () => {
@@ -58,7 +58,9 @@ describe('IpRow.vue', () => {
   })
 
   it('emits edit event on focus', async () => {
-    const { emitted } = render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+    const { emitted } = render(IpRow, {
+      props: { index: 1, disabled: false, rowId: 'test-id' },
+    })
     const input = screen.getByRole('textbox')
 
     await fireEvent.focus(input)
@@ -75,7 +77,9 @@ describe('IpRow.vue', () => {
     }
     mockTime.value = '12:34:56'
 
-    const { emitted } = render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+    const { emitted } = render(IpRow, {
+      props: { index: 1, disabled: false, rowId: 'test-id' },
+    })
     const input = screen.getByRole('textbox')
 
     await fireEvent.update(input, '8.8.8.8')
@@ -90,7 +94,9 @@ describe('IpRow.vue', () => {
     mockSearchIp.mockResolvedValue(false)
     mockState.value.error = 'Invalid IP address'
 
-    const { emitted } = render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+    const { emitted } = render(IpRow, {
+      props: { index: 1, disabled: false, rowId: 'test-id' },
+    })
     const input = screen.getByRole('textbox')
 
     await fireEvent.update(input, 'invalid-ip')
@@ -105,7 +111,9 @@ describe('IpRow.vue', () => {
     mockSearchIp.mockResolvedValue(false)
     mockState.value.error = 'API Error'
 
-    const { emitted } = render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+    const { emitted } = render(IpRow, {
+      props: { index: 1, disabled: false, rowId: 'test-id' },
+    })
     const input = screen.getByRole('textbox')
 
     await fireEvent.update(input, '8.8.8.8')
@@ -117,7 +125,9 @@ describe('IpRow.vue', () => {
   })
 
   it('does not make API call if IP empty', async () => {
-    const { emitted } = render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
+    const { emitted } = render(IpRow, {
+      props: { index: 1, disabled: false, rowId: 'test-id' },
+    })
     const input = screen.getByRole('textbox')
 
     await fireEvent.focus(input)
@@ -132,6 +142,8 @@ describe('IpRow.vue', () => {
 
     render(IpRow, { props: { index: 1, disabled: false, rowId: 'test-id' } })
 
-    expect(screen.getByRole('textbox').parentElement?.querySelector('.spinner')).toBeInTheDocument()
+    expect(
+      screen.getByRole('textbox').parentElement?.querySelector('.spinner')
+    ).toBeInTheDocument()
   })
 })

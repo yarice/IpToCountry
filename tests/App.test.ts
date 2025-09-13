@@ -18,15 +18,15 @@ vi.mock('../src/composables/useAppState', () => ({
     state: {
       visible: mockVisible,
       rows: mockRows,
-      activeRowId: mockActiveRowId
+      activeRowId: mockActiveRowId,
     },
     addRow: mockAddRow,
     setActiveRow: mockSetActiveRow,
     clearActiveRow: mockClearActiveRow,
     isRowActive: mockIsRowActive,
     closeApp: mockCloseApp,
-    reopenApp: mockReopenApp
-  }))
+    reopenApp: mockReopenApp,
+  })),
 }))
 
 vi.mock('../src/components/IpRow.vue', () => ({
@@ -44,8 +44,8 @@ vi.mock('../src/components/IpRow.vue', () => ({
           @focus="$emit('edit', rowId)"
         />
       </div>
-    `
-  }
+    `,
+  },
 }))
 
 describe('App.vue', () => {
@@ -59,7 +59,9 @@ describe('App.vue', () => {
   it('renders the app with title and subtitle', () => {
     render(App)
     expect(screen.getByText(/IP Lookup/i)).toBeInTheDocument()
-    expect(screen.getByText(/Enter one or more IP addresses/)).toBeInTheDocument()
+    expect(
+      screen.getByText(/Enter one or more IP addresses/)
+    ).toBeInTheDocument()
   })
 
   it('adds rows when clicking Add button', async () => {
@@ -84,7 +86,9 @@ describe('App.vue', () => {
 
     mockVisible = false
     const { rerender: rerenderClosed } = render(App)
-    expect(screen.getByRole('button', { name: /Open IP Lookup/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /Open IP Lookup/i })
+    ).toBeInTheDocument()
 
     const reopenBtn = screen.getByRole('button', { name: /Open IP Lookup/i })
     await fireEvent.click(reopenBtn)
@@ -102,10 +106,10 @@ describe('App.vue', () => {
     mockRows.push({ id: 'row1' })
     render(App)
     const addBtn = screen.getByRole('button', { name: /\+ Add/i })
-    
+
     await fireEvent.click(addBtn)
     expect(mockAddRow).toHaveBeenCalled()
-    
+
     const input = screen.getByRole('textbox')
     await fireEvent.focus(input)
     expect(mockSetActiveRow).toHaveBeenCalledWith('row1')
@@ -129,9 +133,9 @@ describe('App.vue', () => {
     mockRows.push({ id: 'row1' }, { id: 'row2' })
     mockActiveRowId = 'row1'
     mockIsRowActive.mockImplementation((id: string) => id === 'row1')
-    
+
     render(App)
-    
+
     const inputs = screen.getAllByRole('textbox')
     expect(inputs[0]).not.toBeDisabled()
     expect(inputs[1]).toBeDisabled()

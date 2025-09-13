@@ -12,7 +12,7 @@ export function useIpLookup() {
   const state = ref<IpLookupState>({
     loading: false,
     error: '',
-    result: null
+    result: null,
   })
 
   const searchIp = async (ip: string): Promise<boolean> => {
@@ -23,9 +23,9 @@ export function useIpLookup() {
 
     state.value.loading = true
     state.value.error = ''
-    
+
     const response = await lookupIp(ip)
-    
+
     if (response.success && response.data) {
       state.value.result = response.data
       state.value.error = ''
@@ -48,6 +48,6 @@ export function useIpLookup() {
   return {
     state,
     searchIp,
-    clearResult
+    clearResult,
   }
 }

@@ -37,7 +37,7 @@ export default defineComponent({
   emits: ['done', 'edit'],
   setup(props, { emit }) {
     const ip = ref('')
-    
+
     const { state, searchIp } = useIpLookup()
     const { time, startClock, stopClock } = useTimer()
 
@@ -48,7 +48,7 @@ export default defineComponent({
     const onBlur = async () => {
       if (ip.value.trim()) {
         const success = await searchIp(ip.value)
-        
+
         if (success && state.value.result) {
           startClock(state.value.result.timezone)
           emit('done')
@@ -58,12 +58,12 @@ export default defineComponent({
       }
     }
 
-    return { 
-      ip, 
-      state, 
-      time, 
-      handleFocus, 
-      onBlur 
+    return {
+      ip,
+      state,
+      time,
+      handleFocus,
+      onBlur,
     }
   },
 })
