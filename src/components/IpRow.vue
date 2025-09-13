@@ -48,7 +48,6 @@ export default defineComponent({
 
     let timer: number | null = null
 
-
     const handleFocus = () => {
       originalIp.value = currentIp.value
       emit('edit')
@@ -58,18 +57,14 @@ export default defineComponent({
       // Delay to make sure isMounted value is properly set - we don't want to search if the app is closed
       setTimeout(async () => {
         if (!isMounted.value) return
-        //no need to check if the ip hasn't changed
+        if (!isIP(currentIp.value)) {
+          error.value = 'Please enter a valid IPv4 or IPv6 address'
+          return
+        }
         if (currentIp.value !== originalIp.value) {
-          if (!isIP(currentIp.value)) {
-            error.value = 'Please enter a valid IPv4 or IPv6 address'
-            return
-          }
           await searchIp()
         }
-        // Only emit 'done' if IP is valid (not empty and not invalid)
-        if (currentIp.value && isIP(currentIp.value)) {
-          emit('done')
-        }
+        emit('done')
       }, ON_BLUR_DELAY)
     }
 
@@ -98,7 +93,7 @@ export default defineComponent({
         time.value = now
       }
       //update immediately
-      update()      
+      update()
       //call every 1s
       timer = window.setInterval(update, CLOCK_UPDATE_INTERVAL)
     }
@@ -107,8 +102,6 @@ export default defineComponent({
       isMounted.value = false
       if (timer) clearInterval(timer)
     })
-
-
 
     return { currentIp, error, flagUrl, time, loading, handleFocus, onBlur }
   }
